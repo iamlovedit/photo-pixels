@@ -9,7 +9,7 @@ body {
 }
 
 a {
-    color: #ff0;
+    color: rgb(252, 252, 251);
     text-decoration: none;
 }
 
@@ -22,9 +22,9 @@ button {
     text-transform: uppercase;
 }
 
-#info {
+#footer {
     position: absolute;
-    top: 0px;
+    bottom: 0px;
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
