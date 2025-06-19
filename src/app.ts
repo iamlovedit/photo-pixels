@@ -29,7 +29,7 @@ const clickPosition = uniform(new THREE.Vector3());
 let camera: THREE.PerspectiveCamera,
   scene: THREE.Scene,
   renderer: THREE.WebGPURenderer;
-let controls: OrbitControls, stats: Stats;
+let orbitControls: OrbitControls, stats: Stats;
 let computeParticles: THREE.ComputeNode | THREE.ComputeNode[];
 
 let isOrbitControlsActive: boolean;
@@ -40,7 +40,7 @@ function init() {
   const { innerWidth, innerHeight } = window;
 
   camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.1, 1000);
-  camera.position.set(0, 5, 20);
+  camera.position.set(0, 100, 100);
 
   scene = new THREE.Scene();
 
@@ -194,21 +194,21 @@ function init() {
 
   // controls
 
-  controls = new OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = true;
-  controls.minDistance = 5;
-  controls.maxDistance = 200;
-  controls.target.set(0, -8, 0);
-  controls.update();
+  orbitControls = new OrbitControls(camera, renderer.domElement);
+  orbitControls.enableDamping = true;
+  orbitControls.minDistance = 5;
+  orbitControls.maxDistance = 200;
+  orbitControls.target.set(0, -8, 0);
+  orbitControls.update();
 
-  controls.addEventListener("start", () => {
+  orbitControls.addEventListener("start", () => {
     isOrbitControlsActive = true;
   });
-  controls.addEventListener("end", () => {
+  orbitControls.addEventListener("end", () => {
     isOrbitControlsActive = false;
   });
 
-  controls.touches = {
+  orbitControls.touches = {
     ONE: null,
     TWO: THREE.TOUCH.DOLLY_PAN,
   };
@@ -239,7 +239,7 @@ function onWindowResize() {
 async function animate() {
   stats.update();
 
-  controls.update();
+  orbitControls.update();
 
   await renderer.computeAsync(computeParticles);
   renderer.resolveTimestampsAsync(THREE.TimestampQuery.COMPUTE);
