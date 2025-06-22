@@ -60,7 +60,7 @@ export class ImagePixelProcessor {
       image.src = this.imageSrc;
     });
   };
-  getAllPixels = () => {
+  getAllPixels = (): ImageData => {
     if (!this.context) {
       throw new Error("Canvas context is not initialized");
     }
